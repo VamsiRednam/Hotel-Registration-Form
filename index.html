@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Hotel Registration Form
+        </title>
+        <link rel="stylesheet" href="bootstrap.css">
+        <link rel="stylesheet" href="bootstrap-icons.css">
+
+        <script>
+            function Submit(){
+                document.getElementById("lblName").innerHTML = document.getElementById("txtName").value;
+                document.getElementById("lblDate").innerHTML  = document.getElementById("txtDate").value;
+                var no_days = document.getElementById("txtDays").value;
+                var no_people = document.getElementById("txtPersons").value;
+
+                var suiteRoom = document.getElementById("optSuite");
+                var dulexRoom = document.getElementById("optDelux");
+
+                var roomAc = document.getElementById("optA/c");
+                var roomLocker = document.getElementById("optLocker");
+
+                var Advanceamount  = document.getElementById("advAmount").value;
+
+                roomType ="";
+                AmenitiesType="";
+
+                roomCost = "";
+                amenitieCost = "";
+                totalCost = "";
+
+                if(suiteRoom.checked){
+                    roomType = suiteRoom.value;
+                    roomCost = 4000;
+
+                }
+                if(dulexRoom.checked){
+                    roomType = dulexRoom.value;
+                    roomCost = 2500;
+                }
+                if(roomAc.checked){
+                    AmenitiesType += roomAc.value + "<br>";
+                    amenitieCost = 1000;
+                    roomCost = roomCost + amenitieCost;
+                    totalCost = roomCost * no_days;
+                }
+                if(roomLocker.checked){
+                    AmenitiesType += roomLocker.value  + "<br>" ;
+                    amenitieCost = 300;
+                    roomCost += amenitieCost;
+                    totalCost = roomCost * no_days;
+                }
+                if (!roomAc.checked && !roomLocker.checked) {
+                AmenitiesType = "Amenities not selected";
+                totalCost = roomCost * no_days;
+            }
+                if(no_people > 2){
+                    var addDays = no_people - 2;
+                    var addPrise = addDays * 1000;
+                    totalCost += addPrise;
+                }
+                if(Advanceamount === "" || Advanceamount < 1000){
+                    alert("Please enter an advance amount of 1000.");
+                    return;
+                }
+
+                var Balanceamount = totalCost - Advanceamount;
+
+               document.getElementById("lblDays").innerHTML = no_days;
+               document.getElementById("lblPeople").innerHTML = no_people;
+               document.getElementById("lblRoom").innerHTML = roomType;
+               document.getElementById("lblAmenities").innerHTML = AmenitiesType;
+               document.getElementById("lblTotalamount").innerHTML = totalCost;
+               document.getElementById("lblAdvamount").innerHTML = Advanceamount;
+               document.getElementById("lblBalanceAmount").innerHTML = Balanceamount;
+               
+            }
+        </script>
+
+    </head>
+    <body class="container-fluid">
+        <header>
+            <div class="d-flex justify-content-center  w-100 border border-dark m-1 text-bg-light" 
+            style="height:60px; align-items: center;">
+                
+            <h2>Hotel Registration Form</h2>
+            </div>
+            <div class="border text-bg-dark d-flex justify-content-center  w-100 m-1 mt-1 " 
+            style="height:40px; align-items: center;">
+                <h3>Customer Info</h3>
+            </div>
+            <div class="d-flex justify-content-center align-items-center border border-dark m-1 w-100 p-2 " style="height: 290px;">
+                <dl class="row  p-2">
+                    <dt class="col-3">Customer Name</dt>
+                    <dd class="col-9"><input type="text" id="txtName" class="w-25 form-control"></dd>
+                    
+                    <dt class="col-3">Check-in Date</dt>
+                    <dd class="col-9"><input type="date" id="txtDate" class="w-25 form-control"></dd>
+                    
+                    <dt class="col-3">Total Number of Days</dt>
+                    <dd class="col-9"><input type="number" id="txtDays" class="w-25 form-control"></dd>
+                    
+                    <dt class="col-3">Total Number of Persons</dt>
+                    <dd class="col-9"><input type="number" id="txtPersons" class="w-25 form-control"></dd>
+                  </dl>
+            </div>
+            <div class="border text-bg-dark d-flex justify-content-center  w-100 m-1 mt-1 " 
+            style="height:40px; align-items: center;">
+                <h3>Select Room Type</h3>
+            </div>
+            <div class="row border border-dark p-2 m-1 w-100">
+                <div class="col text-center">
+                    <img src="Deluxe Room.jpg" height="100px" width="150px"><br>
+                    <input type="radio" id="optDelux" class="form-check-input" value="Delux Room" name="Room"> Delux Room
+
+                </div>
+                <div class="col text-center">
+                    <img src="suite room.jpg" height="100px" width="150px"><br>
+                    <input type="radio" id="optSuite" class="form-check-input" value="Suite Room" name="Room"> Suite Room
+                </div>
+
+            </div>
+            <div class="border text-bg-dark d-flex justify-content-center  w-100 m-1 mt-1 " 
+            style="height:40px; align-items: center;">
+                <h3>Select Amenities</h3>
+            </div>
+            <div class="row border border-dark p-2 m-1 w-100">
+                <div class="col text-center">
+                    <img src="room ac.jpg" height="100px" width="150px"><br>
+                    <input type="checkbox" id="optA/c" class="form-check-input" Value="A/C" name="Suite Room"> A/C
+
+                </div>
+                <div class="col text-center">
+                    <img src="room locker.webp" height="100px" width="150px"><br>
+                    <input type="checkbox" id="optLocker" class="form-check-input" value="Locker" name="Suite Room"> Locker
+                </div>
+
+            </div>
+            <div class="border text-bg-dark d-flex justify-content-center  w-100 m-1 mt-1 " 
+            style="height:40px; align-items: center;">
+                <h3>Advance Amount</h3>
+            </div>
+            <div class="d-flex align-items-center row border border-dark p-2 m-1 w-100" style="height: 60px;">
+                <dl class="row text-center">
+                    <dt class="col-3">Advance Amount</dt>
+                    <dd class="col-9"><input type="number" id="advAmount" class="form-control w-25"></dd>
+                </dl>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-dark w-25" onclick="Submit()">Register</button>
+            </div>
+
+
+
+        </header>
+        <section class="container-fluid border border-dark mt-1 m-1" style="height: 400px;" >
+            <div class="p-4">
+                <dl class="row">
+                    <dt class="col-3 mb-3">Customer Name</dt>
+                    <dd class="col-9 mb-3" id="lblName">:</dd>
+                    <dt class="col-3 mb-3">Check In Date</dt>
+                    <dd class="col-9 mb-3" id="lblDate">:</dd>
+                    <dt class="col-3 mb-3">Total No of Days</dt>
+                    <dd class="col-9 mb-3" id="lblDays">:</dd>
+                    <dt class="col-3 mb-3">No of People</dt>
+                    <dd class="col-9 mb-3" id="lblPeople">:</dd>
+                    <dt class="col-3 mb-3">Room Type</dt>
+                    <dd class="col-9 mb-3" id="lblRoom">:</dd>
+                    <dt class="col-3 mb-3">Amenities</dt>
+                    <dd class="col-9 mb-3" id="lblAmenities">:</dd>
+                    <dt class="col-3 mb-3">Total Amount</dt>
+                    <dd class="col-9 mb-3" id="lblTotalamount">:</dd>
+                    <dt class="col-3 mb-3">Advance Amount</dt>
+                    <dd class="col-9 mb-3" id="lblAdvamount">:</dd>
+                    <dt class="col-3 mb-3">Balance Amount</dt>
+                    <dd class="col-9 mb-3" id="lblBalanceAmount">:</dd>
+                </dl>
+            </div>
+        </section >
+    </body>
+</html>
